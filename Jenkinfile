@@ -3,7 +3,7 @@ pipeline {
     stages { 
         stage('Checkout') { 
             steps { 
-                sh 'git changelog: false, poll: false, url: 'https://github.com/sandeepsingh07/hello-world-1.git''
+                git changelog: false, poll: false, url: 'https://github.com/sandeepsingh07/hello-world-1.git'
             } 
         } 
         stage('Test') {  
