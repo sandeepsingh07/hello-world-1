@@ -1,23 +1,22 @@
-pipeline { 
-    agent any  
-    stages { 
-        stage('Checkout') { 
-            steps { 
-                git changelog: false, poll: false, url: 'https://github.com/sandeepsingh07/hello-world-1.git'
-            } 
-        } 
-        stage('Test') {  
-            steps { 
-                // check if artifacts are present in the correct location 
-	// load test data into the database 
-	// execute the test case 
-	// continue only if tests passed 
-            } 
-        }uio 
-        stage('Deploy') {  
-            steps { 
-                // Fetch tested code and deploy it to production 
-            } 
-        } 
-    } 
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven"
+    }
+
+    stages {
+        stage('Git Clone') {
+            steps {
+               git credentialsId: 'git', url: 'https://github.com/sandeepsingh07/hello-world-1.git'
+            }
+            }
+        stage('Build'){
+            steps{
+                sh "mvn clean install"
+            }
+        }
+        
+    }
 }
