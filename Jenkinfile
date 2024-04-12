@@ -1,0 +1,14 @@
+pipeline { 
+    agent any 
+    tools {
+    maven "maven"
+    }
+    stages {
+        stage('github checkout') { 
+            steps { 
+                sh 'git changelog: false, poll: false, url: 'https://github.com/sandeepsingh07/hello-world-1.git'' 
+            }
+        }
+        
+    }
+}
