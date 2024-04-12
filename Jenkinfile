@@ -1,10 +1,9 @@
 pipeline { 
     agent any  
     stages { 
-        stage('Build') { 
+        stage('Checkout') { 
             steps { 
-                // compile code  
-	// if successful, move build artifacts to the desired location 
+                sh 'git changelog: false, poll: false, url: 'https://github.com/sandeepsingh07/hello-world-1.git''
             } 
         } 
         stage('Test') {  
