@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven"
+    }
+
+    stages {
+        stage('Git Clone') {
+            steps {
+               git 'https://github.com/sandeepsingh07/hello-world-1.git'
+            }
+            }
+        stage('Build'){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+       stage('Deploy to tomcat'){
+           steps{
+            deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://44.212.46.140:8080/')], contextPath: null, war: '**/*.war'
+           }
+       }
+        
+    }
+}
