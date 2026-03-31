@@ -1,10 +1,10 @@
 pipeline {
-    agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven"
+    agent {
+           docker {
+            image 'java21-maven'
+        }
     }
+
 
     stages {
         stage('Git Clone') {
@@ -17,11 +17,11 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-       stage('Deploy to tomcat'){
-           steps{
-            deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://44.212.46.140:8080/')], contextPath: null, war: '**/*.war'
-           }
-       }
+ #      stage('Deploy to tomcat'){
+ #          steps{
+ #           deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://44.212.46.140:8080/')], contextPath: null, war: '**/*.war'
+ #          }
+ #      }
         
     }
 }
