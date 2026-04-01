@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-           docker {
-            image 'java21-maven'
-        }
-    }
+    agent any
 
 
     stages {
