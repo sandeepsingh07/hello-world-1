@@ -6,7 +6,6 @@ pipeline {
         maven "maven"
     }
 
-
     stages {
         stage('Git Clone') {
             steps {
@@ -18,7 +17,16 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-
+        stage('test'){
+            steps{
+                sh "mvn test"
+            }
+        }
+       stage('Deploy'){
+            steps{
+                deploy adapters: [tomcat8(credentialsId: 'tomcat-cred', url: 'http://13.232.246.52:8080/')], contextPath: null, war: '**/*.war'
+            }
+        }
         
     }
 }
